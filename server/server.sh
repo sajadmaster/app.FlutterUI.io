@@ -4,11 +4,11 @@
 echo 'Server start script initialized...'
 
 # Set the port
-PORT=4040
+PORT=8080
 
 # Kill anything that is already running on that port
-echo 'Cleaning port' $PORT '...'
-fuser -k 4040/tcp
+# echo 'Cleaning port' $PORT '...'
+# fuser -k 8080/tcp
 
 # Change directories to the release folder
 cd build/web/
