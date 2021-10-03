@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Moved to github like a charm!'),
+      home: const MyHomePage(title: 'Test cloud run. crossing fingers ^^'),
     );
   }
 }
