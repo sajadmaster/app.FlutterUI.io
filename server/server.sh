@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Welcome
-echo 'Server start script initialized...'
+echo 'Server main script initialized...'
 
 # Set the port
 PORT=8080
