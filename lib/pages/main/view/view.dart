@@ -5,7 +5,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutterui_web/constant/colors.dart';
 import 'package:flutterui_web/constant/images.dart';
+import 'package:flutterui_web/pages/main/models/item_left_navigation.dart';
 import 'package:flutterui_web/widgets/appbar.dart';
+import 'package:flutterui_web/widgets/divider_widget.dart';
+import 'package:flutterui_web/widgets/item_left_navigation.dart';
 import 'package:get/get.dart';
 
 import '../controller/controller.dart';
@@ -22,7 +25,7 @@ class View extends StatelessWidget {
         initState: (state) {},
         builder: (_) {
           return Scaffold(
-              backgroundColor: MyColors.bgArc,
+              backgroundColor: MyColors.background,
               appBar: getAppbar(title: _.text.toString(), iconStart: MyImages.icon,),
               body: getBody(_));
         });

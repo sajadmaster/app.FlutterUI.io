@@ -7,13 +7,11 @@ class MyColors {
   static const primary = Color(0xFFFCD535);
   static const textPrimary = Color(0xFFF1C204);
   static const onPrimary = Color(0xFF1E2329);
-  static const background = Color(0xFFE5E5E5);
 
   static const red = Color(0xFFEE6055);
   static const error = Color(0xFFB00020);
   static const link = Color(0xFFF1C204);
   static const success = Color(0xFF0AA450);
-  static const divider = Color(0xFFE4E5E5);
   static const subTitle = Color(0xFF4F5661);
   static const desc = Color(0xFF7C8799);
   static const desc2 = Color(0xFFB3B4B6);
@@ -29,6 +27,8 @@ class MyColors {
 
   static const text = Color(0xff000000);
   static const border = grey05;
+  static const divider = grey01;
+  static const background = Color(0xFFFFFFFF);
 
   static const grey01 = Color(0xffe0e0e0);
   static const grey02 = Color(0xffc0c0c0);

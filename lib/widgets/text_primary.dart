@@ -8,6 +8,7 @@ class TextPrimary extends StatelessWidget {
   final FontWeight? weight;
   final IconData? icon;
   final bool? isCenter;
+  final TextStyle? style;
 
   const TextPrimary(
       {Key? key,
@@ -16,7 +17,9 @@ class TextPrimary extends StatelessWidget {
       this.color,
       this.weight,
       this.icon,
-      this.isCenter})
+      this.isCenter,
+      this.style,
+      })
       : super(key: key);
 
   @override
@@ -40,7 +43,7 @@ class TextPrimary extends StatelessWidget {
             child: Text(
           text,
           textAlign: isCenter ?? false ? TextAlign.center : TextAlign.start,
-          style: TextStyle(
+          style: style ?? TextStyle(
               fontSize: size ?? 20,
               color: color ?? Colors.black,
               fontWeight: weight ?? FontWeight.normal),

@@ -15,6 +15,7 @@ AppBar getAppbar({required String title,
   Function()? onPressed,
   List<Widget>? actions}) {
   return AppBar(
+    shape: const Border(bottom: BorderSide(color: MyColors.divider, width: MyDimens.divider)),
     centerTitle: false,
     backgroundColor: MyColors.header,
     title: Row(
