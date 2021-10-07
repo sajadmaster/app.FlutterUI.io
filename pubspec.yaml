@@ -68,9 +68,6 @@ flutter:
     - assets/fonts/
 
   fonts:
-    - family: IranSans
-      fonts:
-        - asset: assets/fonts/iran_sans.ttf
     - family: Manrope
       fonts:
           - asset: assets/fonts/Manrope-VariableFont_wght.ttf
