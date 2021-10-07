@@ -25,6 +25,6 @@ Widget getBody(MainController controller) {
 
 Widget _buildItems(MainController controller, int index) {
   ItemLeftNavigation item = controller.items[index];
-  return getLeftNavigationItems(
-      text: item.title, icon: item.icon, onTap: item.onPressed);
+  return LeftNavigationItems(
+      text: item.title, icon: item.icon, onPressed: item.onPressed);
 }

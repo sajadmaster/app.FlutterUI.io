@@ -94,4 +94,12 @@ class MyStyles {
       fontFamily: "Manrope",
       fontStyle: FontStyle.normal,
       fontSize: 24.0);
+
+
+  static const TextStyle hover = TextStyle(
+      color: MyColors.blue05,
+      fontWeight: FontWeight.w700,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 12.0);
 }
