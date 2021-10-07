@@ -1,10 +1,10 @@
 part of 'view.dart';
 
 Widget getBody(MainController controller) {
-  return ListView(
-    children: [
-      Text(controller.text.value)
-    ],
+  return Center(
+    child: Text(
+      Get.width.toString(),
+      style: TextStyle(fontSize: 40),
+    ),
   );
 }
-

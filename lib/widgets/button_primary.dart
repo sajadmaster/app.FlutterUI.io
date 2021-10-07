@@ -28,7 +28,7 @@ class ButtonPrimary extends StatelessWidget {
       elevation: 0,
 
       textStyle: const TextStyle(
-          fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'IranSans'),
+          fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Manrope'),
       primary: backgroundColor ?? MyColors.primary,
       onPrimary: textColor ?? MyColors.onPrimary,
       shape: RoundedRectangleBorder(

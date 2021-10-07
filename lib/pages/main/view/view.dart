@@ -4,6 +4,8 @@ import 'dart:ui';
 /* MVC */
 import 'package:flutter/material.dart';
 import 'package:flutterui_web/constant/colors.dart';
+import 'package:flutterui_web/constant/images.dart';
+import 'package:flutterui_web/widgets/appbar.dart';
 import 'package:get/get.dart';
 
 import '../controller/controller.dart';
@@ -21,6 +23,7 @@ class View extends StatelessWidget {
         builder: (_) {
           return Scaffold(
               backgroundColor: MyColors.bgArc,
+              appBar: getAppbar(title: _.text.toString(), iconStart: MyImages.icon, isBackEnable: false),
               body: getBody(_));
         });
   }

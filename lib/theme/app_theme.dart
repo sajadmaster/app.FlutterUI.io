@@ -6,7 +6,7 @@ final ThemeData appThemeDataLight = ThemeData(
   splashColor: MyColors.primary,
   highlightColor: MyColors.primary,
   backgroundColor: Colors.white,
-  fontFamily: 'IranSans',
+  fontFamily: 'Manrope',
   brightness: Brightness.light,
   primarySwatch: createMaterialColor(MyColors.primary),
   colorScheme: const ColorScheme.light(
@@ -35,7 +35,7 @@ final ThemeData appThemeDataDark = ThemeData(
   highlightColor: MyColors.primary,
   backgroundColor: Colors.black,
   cardColor: Colors.black,
-  fontFamily: 'IranSans',
+  fontFamily: 'Manrope',
   brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
     primary: Color(0xffbb86fc),
