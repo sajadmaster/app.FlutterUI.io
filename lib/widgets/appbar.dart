@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterui_web/constant/dimens.dart';
+import 'package:flutterui_web/constant/strings.dart';
+import 'package:flutterui_web/constant/styles.dart';
 import 'package:get/get.dart';
 import 'package:flutterui_web/constant/colors.dart';
-import 'package:flutterui_web/constant/static_values.dart';
+
+import 'button_primary.dart';
 
 AppBar getAppbar({required String title,
-  required bool isBackEnable,
   IconData? icon,
   String? iconStart,
   Function()? onPressed,
@@ -13,16 +17,20 @@ AppBar getAppbar({required String title,
   return AppBar(
     centerTitle: false,
     backgroundColor: MyColors.header,
-    title: Text(
-        title,
-        textAlign: TextAlign.start,
-        style: const TextStyle(
-            color: const Color(0xff414141),
-            fontWeight: FontWeight.w600,
-            fontFamily: "Manrope",
-            fontStyle: FontStyle.normal,
-            fontSize: 24.0
+    title: Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+            title,
+            textAlign: TextAlign.start,
+            style: MyStyles.h5.copyWith(color: MyColors.grey06),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: MyDimens.marginHorizontal1),
+          child: ButtonPrimary(text: MyStrings.download.tr, onPressed: () {  }, icon: const Icon(CupertinoIcons.cloud_download_fill, color: MyColors.grey05,),),
+        )
+      ],
     ),
     leadingWidth: 56,
     leading: iconStart == null

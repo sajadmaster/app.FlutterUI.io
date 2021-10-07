@@ -87,4 +87,11 @@ class MyStyles {
       fontFamily: "Manrope",
       fontStyle: FontStyle.normal,
       fontSize: 10.0);
+
+  static const TextStyle title = TextStyle(
+      color: MyColors.grey06,
+      fontWeight: FontWeight.w600,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 24.0);
 }

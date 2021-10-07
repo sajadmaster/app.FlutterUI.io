@@ -46,7 +46,7 @@ class InputWidget extends StatelessWidget {
         labelText: labelText,
         labelStyle: const TextStyle(color: MyColors.black, fontSize: 18),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(MyDimen.radius),
+          borderRadius: BorderRadius.circular(MyDimens.radius),
         ),
         filled: true,
         fillColor: Colors.transparent,

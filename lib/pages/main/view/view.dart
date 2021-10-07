@@ -23,7 +23,7 @@ class View extends StatelessWidget {
         builder: (_) {
           return Scaffold(
               backgroundColor: MyColors.bgArc,
-              appBar: getAppbar(title: _.text.toString(), iconStart: MyImages.icon, isBackEnable: false),
+              appBar: getAppbar(title: _.text.toString(), iconStart: MyImages.icon,),
               body: getBody(_));
         });
   }
