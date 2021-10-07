@@ -29,7 +29,12 @@ class MyColors {
   static const unselectedItemColor =  Color(0xFF6E6E6E);
 
 
+  static const text =  Color(0xff000000);
+
+
 }
+
+
 
 
 MaterialColor createMaterialColor(Color color) {

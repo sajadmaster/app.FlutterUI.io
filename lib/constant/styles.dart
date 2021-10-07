@@ -3,61 +3,88 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class MyStyles {
-  static const TextStyle secondary = TextStyle(
-    color: MyColors.secondary,
-    fontSize: 19,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const TextStyle primary = TextStyle(
-    color: MyColors.primary,
-    fontSize: 19,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const TextStyle title = TextStyle(
-    color: MyColors.black,
-    fontSize: 19,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const TextStyle style1_dark = TextStyle(
-    color: MyColors.black,
-    fontSize: 19,
-    fontWeight: FontWeight.normal,
-  );
-
-  static const TextStyle style2_dark = TextStyle(
-    color: MyColors.black,
-    fontSize: 17,
-    fontWeight: FontWeight.w500,
-  );
-
-  static const TextStyle style1_desc = TextStyle(
-    color: MyColors.desc,
-    fontSize: 17,
-    fontWeight: FontWeight.normal,
-  );
-
-  static const TextStyle style2_desc = TextStyle(
-    color: MyColors.desc,
-    fontSize: 20,
-    fontWeight: FontWeight.normal,
-  );
-
-  static const TextStyle style1_dark_bold = TextStyle(
-    color: MyColors.black,
-    fontSize: 19,
-    fontWeight: FontWeight.bold,
-  );
-
-  static const TextStyle style1_grey = TextStyle(
-    color: MyColors.desc,
-    fontSize: 19,
-    fontWeight: FontWeight.bold,
-  );
-
+  static const TextStyle h1 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w700,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 96.0);
+  static const TextStyle h2 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w700,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 60.0);
+  static const TextStyle h3 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w700,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 48.0);
+  static const TextStyle h4 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w600,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 34.0);
+  static const TextStyle h5 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w600,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 24.0);
+  static const TextStyle h6 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w600,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 20.0);
+  static const TextStyle subtitle1 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w700,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 16.0);
+  static const TextStyle subtitle2 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w700,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 14.0);
+  static const TextStyle body1 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 16.0);
+  static const TextStyle body2 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 11.0);
+  static const TextStyle body3 = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 9.0);
+  static const TextStyle button = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w700,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 16.0);
+  static const TextStyle caption = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 9.0);
+  static const TextStyle overline = TextStyle(
+      color: MyColors.text,
+      fontWeight: FontWeight.w800,
+      fontFamily: "Manrope",
+      fontStyle: FontStyle.normal,
+      fontSize: 10.0);
 }
-
-const TextStyle optionStyle =
-    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
