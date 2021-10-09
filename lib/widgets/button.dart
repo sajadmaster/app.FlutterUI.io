@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutterui_web/constant/colors.dart';
 import 'package:flutterui_web/constant/dimens.dart';
 
-class ButtonPrimary extends StatelessWidget {
+class ButtonWidget extends StatelessWidget {
   final String text;
   final Function()? onPressed;
   final double? width;
@@ -13,7 +13,7 @@ class ButtonPrimary extends StatelessWidget {
   final Color? border;
   final Widget? icon;
 
-  const ButtonPrimary({
+  const ButtonWidget({
     Key? key,
     required this.text,
     required this.onPressed,

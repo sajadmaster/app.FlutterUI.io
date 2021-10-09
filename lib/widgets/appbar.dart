@@ -7,7 +7,7 @@ import 'package:flutterui_web/constant/styles.dart';
 import 'package:get/get.dart';
 import 'package:flutterui_web/constant/colors.dart';
 
-import 'button_primary.dart';
+import 'button.dart';
 
 AppBar getAppbar({required String title,
   IconData? icon,
@@ -29,7 +29,7 @@ AppBar getAppbar({required String title,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: MyDimens.marginHorizontal1),
-          child: ButtonPrimary(text: MyStrings.download.tr, onPressed: () {  }, icon: const Icon(CupertinoIcons.cloud_download_fill, color: MyColors.icon,),),
+          child: ButtonWidget(text: MyStrings.download.tr, onPressed: () {  }, icon: const Icon(CupertinoIcons.cloud_download_fill, color: MyColors.icon,),),
         )
       ],
     ),

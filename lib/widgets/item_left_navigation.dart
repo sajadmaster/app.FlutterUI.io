@@ -3,7 +3,7 @@ import 'package:flutterui_web/constant/colors.dart';
 import 'package:flutterui_web/constant/styles.dart';
 import 'package:get/get.dart';
 
-import 'text_primary.dart';
+import 'text.dart';
 
 class LeftNavigationItems extends StatelessWidget {
   final String text;

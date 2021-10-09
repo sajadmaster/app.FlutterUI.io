@@ -14,10 +14,10 @@ import 'package:flutterui_web/pages/main/models/component.dart';
 import 'package:flutterui_web/pages/main/models/item_left_navigation.dart';
 import 'package:flutterui_web/widgets/appbar.dart';
 import 'package:flutterui_web/widgets/custom_expansion_tile.dart';
-import 'package:flutterui_web/widgets/divider_widget.dart';
+import 'package:flutterui_web/widgets/divider.dart';
 import 'package:flutterui_web/widgets/input.dart';
 import 'package:flutterui_web/widgets/item_left_navigation.dart';
-import 'package:flutterui_web/widgets/text_primary.dart';
+import 'package:flutterui_web/widgets/text.dart';
 import 'package:get/get.dart';
 
 import '../controller/controller.dart';
