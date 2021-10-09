@@ -3,6 +3,9 @@ FROM ubuntu:20.04
 # Setup 
 RUN apt-get update && apt-get install -y unzip xz-utils git openssh-client curl python3 && apt-get upgrade -y && rm -rf /var/cache/apt
 
+ENV PORT 8080
+ENV HOST 0.0.0.0
+
 # Install Flutter
 RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
