@@ -12,6 +12,7 @@ class MainController extends GetxController {
   RxString text = MyStrings.appName.tr.obs;
   RxList<ItemLeftNavigation> items = <ItemLeftNavigation>[].obs;
   RxList<Component> components = <Component>[].obs;
+  Rx<Items> currentWidget = Items().obs;
   late TextEditingController searchController;
 
   @override

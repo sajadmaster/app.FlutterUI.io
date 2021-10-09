@@ -8,4 +8,5 @@ final Map<String, String> enUS = {
   MyStrings.assets: 'Assets',
 
   MyStrings.searchHint: 'Search widgets...',
+  MyStrings.widgetType: 'Widget Type',
 };

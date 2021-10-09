@@ -9,6 +9,7 @@ class MyStrings {
   static const String assets = 'assets';
 
   static const String searchHint = 'searchHint';
+  static const String widgetType = 'widgetType';
 
 
 

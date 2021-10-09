@@ -62,7 +62,34 @@ Widget getBody(MainController controller) {
         child: Container(
           color: MyColors.grey01,
         ),
-      )
+      ),
+      SizedBox(
+        width: 320,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              width: 320,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    MyStrings.widgetType.tr,
+                    style: MyStyles.body2.copyWith(color: MyColors.text),
+                  ),
+                  Text(
+                    controller.currentWidget.value.title.toString(),
+                    style: MyStyles.body2.copyWith(color: MyColors.text),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     ],
   );
 }
@@ -109,10 +136,14 @@ Widget _buildComponentItems(
     borderColor.value = MyColors.grey01;
   }
 
+  void _incrementEnter(PointerEvent details) {
+    controller.currentWidget.value = item;
+  }
+
   return Obx((){
     return MouseRegion(
       cursor: MouseCursor.defer,
-      // onEnter: _incrementEnter,
+      onEnter: _incrementEnter,
       onHover: _updateLocation,
       onExit: _incrementExit,
       child: InkWell(
