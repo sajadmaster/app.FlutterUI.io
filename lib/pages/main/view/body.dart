@@ -25,18 +25,35 @@ Widget getBody(MainController controller) {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: InputWidget(
                 hintText: MyStrings.searchHint.tr,
                 labelText: MyStrings.searchHint.tr,
                 controller: controller.searchController,
-                suffixIcon:const Icon(CupertinoIcons.search, color: MyColors.icon, size: MyDimens.iconSize,),
+                suffixIcon: const Icon(
+                  CupertinoIcons.search,
+                  color: MyColors.icon,
+                  size: MyDimens.iconSize,
+                ),
               ),
             ),
-            const DividerWidget(type : Type.horizontal,),
-
+            const DividerWidget(
+              type: Type.horizontal,
+            ),
+            ListView.separated(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              itemBuilder: (context, index) =>
+                  _buildComponents(controller, index),
+              itemCount: controller.components.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const DividerWidget(
+                  type: Type.horizontal,
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -54,4 +71,61 @@ Widget _buildItems(MainController controller, int index) {
   ItemLeftNavigation item = controller.items[index];
   return LeftNavigationItems(
       text: item.title, icon: item.icon, onPressed: item.onPressed);
+}
+
+Widget _buildComponents(MainController controller, int index) {
+  Component item = controller.components[index];
+  return CustomExpansionTile(
+    title: TextPrimary(
+      text: item.title.toString(),
+      style: MyStyles.subtitle2.copyWith(color: MyColors.text),
+    ),
+    children: [
+      GridView.count(
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: 3,
+        crossAxisSpacing: 8.0,
+        children: List.generate(item.items!.length, (index) {
+          return _buildComponentItems(controller, index, item);
+        }),
+      )
+    ],
+  );
+}
+
+Widget _buildComponentItems(
+    MainController controller, int index, Component component) {
+  Items item = component.items![index];
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(MyDimens.buttonRadius),
+      border: Border.all(
+          color: MyColors.grey01,
+          width: MyDimens.borderWidth,
+      ),
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          item.icon.toString(),
+          fit: BoxFit.contain,
+          width: 26,
+          height: 26,
+        ),
+        const SizedBox(
+          height: 4.0,
+        ),
+        TextPrimary(
+          text: item.title.toString(),
+          isCenter: true,
+          style: MyStyles.body3.copyWith(color: MyColors.grey06),
+        )
+      ],
+    ),
+  );
 }
