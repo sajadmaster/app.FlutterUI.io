@@ -98,34 +98,62 @@ Widget _buildComponents(MainController controller, int index) {
 Widget _buildComponentItems(
     MainController controller, int index, Component component) {
   Items item = component.items![index];
-  return Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(MyDimens.buttonRadius),
-      border: Border.all(
-          color: MyColors.grey01,
-          width: MyDimens.borderWidth,
+
+  Rx<Color> borderColor = MyColors.grey01.obs;
+
+  void _updateLocation(PointerEvent details) {
+    borderColor.value = MyColors.blue02;
+  }
+
+  void _incrementExit(PointerEvent details) {
+    borderColor.value = MyColors.grey01;
+  }
+
+  return Obx((){
+    return MouseRegion(
+      cursor: MouseCursor.defer,
+      // onEnter: _incrementEnter,
+      onHover: _updateLocation,
+      onExit: _incrementExit,
+      child: InkWell(
+        onTap: ()=>{},
+        hoverColor: MyColors.white,
+        highlightColor: MyColors.blue01,
+        splashColor: Colors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(MyDimens.buttonRadius),
+            border: Border.all(
+              color: borderColor.value,
+              width: MyDimens.borderWidth,
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                item.icon.toString(),
+                fit: BoxFit.contain,
+                width: 26,
+                height: 26,
+              ),
+              const SizedBox(
+                height: 4.0,
+              ),
+              TextPrimary(
+                text: item.title.toString(),
+                isCenter: true,
+                style: MyStyles.body3.copyWith(color: MyColors.grey06),
+              )
+            ],
+          ),
+        ),
       ),
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          item.icon.toString(),
-          fit: BoxFit.contain,
-          width: 26,
-          height: 26,
-        ),
-        const SizedBox(
-          height: 4.0,
-        ),
-        TextPrimary(
-          text: item.title.toString(),
-          isCenter: true,
-          style: MyStyles.body3.copyWith(color: MyColors.grey06),
-        )
-      ],
-    ),
-  );
+    );
+
+  });
 }
+
+
