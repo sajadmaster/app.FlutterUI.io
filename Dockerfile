@@ -1,40 +1,23 @@
-# Install dependencies
-FROM debian:latest AS build-env
-RUN apt-get update 
-RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback python3 psmisc
-RUN apt-get clean
+FROM ubuntu:20.04
 
-# Clone the flutter repo
+# Setup 
+RUN apt-get update && apt-get install -y unzip xz-utils git openssh-client curl python3 && apt-get upgrade -y && rm -rf /var/cache/apt
+
+# Install Flutter
 RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
-
-# Set flutter path
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
-
-# Enable flutter web
 RUN flutter channel master
 RUN flutter upgrade
 RUN flutter config --enable-web
-
-# Run flutter doctor
 RUN flutter doctor -v
 
-# Copy the app files to the container
+# Copy files to container and get dependencies
 COPY . /usr/local/bin/app
-
-# Set the working directory to the app files within the container
 WORKDIR /usr/local/bin/app
-
-# Get App Dependencies
 RUN flutter pub get
-
-# Build the app for the web
 RUN flutter build web
 
-# Document the exposed port
-EXPOSE 8080
-
-# Set the server startup script as executable
+# Document the exposed port and start server
 RUN ["chmod", "+x", "/usr/local/bin/app/server/server.sh"]
-
-# Start the web server
+EXPOSE 8080
 ENTRYPOINT [ "/usr/local/bin/app/server/server.sh" ]
