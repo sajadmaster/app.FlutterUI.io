@@ -6,4 +6,6 @@ final Map<String, String> enUS = {
   MyStrings.uiBuilder: 'UI\nBuilder',
   MyStrings.tree: 'Tree',
   MyStrings.assets: 'Assets',
+
+  MyStrings.searchHint: 'Search widgets...',
 };

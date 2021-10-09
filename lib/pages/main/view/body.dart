@@ -14,11 +14,38 @@ Widget getBody(MainController controller) {
           itemBuilder: (context, index) => _buildItems(controller, index),
           itemCount: controller.items.length,
           separatorBuilder: (BuildContext context, int index) {
-            return const DividerWidget();
+            return const DividerWidget(type: Type.horizontal);
           },
         ),
       ),
-      Expanded(child: Container(color: MyColors.grey01,),)
+      const DividerWidget(type: Type.vertical),
+      SizedBox(
+        width: 260,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: InputWidget(
+                hintText: MyStrings.searchHint.tr,
+                labelText: MyStrings.searchHint.tr,
+                controller: controller.searchController,
+                suffixIcon:const Icon(CupertinoIcons.search, color: MyColors.icon, size: MyDimens.iconSize,),
+              ),
+            ),
+            const DividerWidget(type : Type.horizontal,),
+
+          ],
+        ),
+      ),
+      const DividerWidget(type: Type.vertical),
+      Expanded(
+        child: Container(
+          color: MyColors.grey01,
+        ),
+      )
     ],
   );
 }

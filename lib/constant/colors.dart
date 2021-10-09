@@ -29,6 +29,7 @@ class MyColors {
   static const border = grey05;
   static const divider = grey01;
   static const background = Color(0xFFFFFFFF);
+  static const icon = grey05;
 
   static const grey01 = Color(0xffe0e0e0);
   static const grey02 = Color(0xffc0c0c0);

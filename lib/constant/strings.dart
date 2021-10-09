@@ -8,6 +8,8 @@ class MyStrings {
   static const String tree = 'tree';
   static const String assets = 'assets';
 
+  static const String searchHint = 'searchHint';
+
 
 
 }

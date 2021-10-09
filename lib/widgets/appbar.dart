@@ -29,7 +29,7 @@ AppBar getAppbar({required String title,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: MyDimens.marginHorizontal1),
-          child: ButtonPrimary(text: MyStrings.download.tr, onPressed: () {  }, icon: const Icon(CupertinoIcons.cloud_download_fill, color: MyColors.grey05,),),
+          child: ButtonPrimary(text: MyStrings.download.tr, onPressed: () {  }, icon: const Icon(CupertinoIcons.cloud_download_fill, color: MyColors.icon,),),
         )
       ],
     ),

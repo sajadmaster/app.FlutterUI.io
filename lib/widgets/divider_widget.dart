@@ -4,10 +4,20 @@ import 'package:flutterui_web/constant/dimens.dart';
 import 'package:loading_overlay_pro/animations/bouncing_line.dart';
 
 class DividerWidget extends StatelessWidget {
-  const DividerWidget({Key? key}) : super(key: key);
+  final Type type;
 
-  @override
+  const DividerWidget({
+    Key? key,
+    required this.type,
+  }) : super(key: key);
+
+@override
   Widget build(BuildContext context) {
-    return const Divider(color: MyColors.divider, height: MyDimens.divider,);
+    return type == Type.horizontal ? const Divider(color: MyColors.divider, height: MyDimens.divider,) : const VerticalDivider(color: MyColors.divider, width: MyDimens.divider,);
   }
+}
+
+enum Type {
+  vertical,
+  horizontal
 }

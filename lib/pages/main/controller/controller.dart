@@ -9,12 +9,24 @@ import 'package:get_storage/get_storage.dart';
 class MainController extends GetxController {
   RxString text = MyStrings.appName.tr.obs;
   RxList<ItemLeftNavigation> items = <ItemLeftNavigation>[].obs;
+  late TextEditingController searchController;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     getItems();
+    searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  onSearchTextChanged(String text) async {
+
   }
 
   getItems() {
