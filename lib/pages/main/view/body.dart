@@ -1,97 +1,127 @@
 part of 'view.dart';
 
 Widget getBody(MainController controller) {
-  return Row(
-    mainAxisSize: MainAxisSize.max,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SizedBox(
-        width: 61,
-        child: ListView.separated(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          physics: const ClampingScrollPhysics(),
-          itemBuilder: (context, index) => _buildItems(controller, index),
-          itemCount: controller.items.length,
-          separatorBuilder: (BuildContext context, int index) {
-            return const DividerWidget(type: Type.horizontal);
-          },
+  return Obx(() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 61,
+          child: ListView.separated(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            itemBuilder: (context, index) => _buildItems(controller, index),
+            itemCount: controller.items.length,
+            separatorBuilder: (BuildContext context, int index) {
+              return const DividerWidget(type: Type.horizontal);
+            },
+          ),
         ),
-      ),
-      const DividerWidget(type: Type.vertical),
-      SizedBox(
-        width: 260,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: InputWidget(
-                hintText: MyStrings.searchHint.tr,
-                labelText: MyStrings.searchHint.tr,
-                controller: controller.searchController,
-                suffixIcon: const Icon(
-                  CupertinoIcons.search,
-                  color: MyColors.icon,
-                  size: MyDimens.iconSize,
+        const DividerWidget(type: Type.vertical),
+        SizedBox(
+          width: 260,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: InputWidget(
+                  hintText: MyStrings.searchHint.tr,
+                  labelText: MyStrings.searchHint.tr,
+                  controller: controller.searchController,
+                  suffixIcon: const Icon(
+                    CupertinoIcons.search,
+                    color: MyColors.icon,
+                    size: MyDimens.iconSize,
+                  ),
                 ),
               ),
-            ),
-            const DividerWidget(
-              type: Type.horizontal,
-            ),
-            ListView.separated(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemBuilder: (context, index) =>
-                  _buildComponents(controller, index),
-              itemCount: controller.components.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return const DividerWidget(
-                  type: Type.horizontal,
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      const DividerWidget(type: Type.vertical),
-      Expanded(
-        child: Container(
-          color: MyColors.grey01,
-        ),
-      ),
-      SizedBox(
-        width: 320,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              width: 320,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    MyStrings.widgetType.tr,
-                    style: MyStyles.body2.copyWith(color: MyColors.text),
-                  ),
-                  Text(
-                    controller.currentWidget.value.title.toString(),
-                    style: MyStyles.body2.copyWith(color: MyColors.text),
-                  ),
-                ],
+              const DividerWidget(
+                type: Type.horizontal,
               ),
-            ),
-          ],
+              ListView.separated(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                itemBuilder: (context, index) =>
+                    _buildComponents(controller, index),
+                itemCount: controller.components.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const DividerWidget(
+                    type: Type.horizontal,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-    ],
-  );
+        const DividerWidget(type: Type.vertical),
+        Expanded(
+          child: LayoutBuilder(builder: (context, constraints) {
+            if (constraints.constrainWidth() <
+                controller.initialWidth + MyDimens.canvasPadding * 2) {
+              controller.deviceWidth.value =
+                  constraints.constrainWidth() - MyDimens.canvasPadding * 2;
+            } else {
+              controller.deviceWidth.value = controller.initialWidth;
+            }
+            return SafeArea(
+              child: Container(
+                color: MyColors.grey01,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Container(
+                          margin: const EdgeInsets.all(MyDimens.canvasPadding),
+                          width: controller.deviceWidth.value,
+                          height: controller.deviceWidth.value *
+                              controller.ratio.value,
+                          color: MyColors.background,
+                          child: Center(
+                              child: Text(
+                                  controller.deviceWidth.value.toString()))),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ),
+        SizedBox(
+          width: 320,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                width: 320,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      MyStrings.widgetType.tr,
+                      style: MyStyles.body2.copyWith(color: MyColors.text),
+                    ),
+                    Text(
+                      controller.currentWidget.value.title.toString(),
+                      style: MyStyles.body2.copyWith(color: MyColors.text),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  });
 }
 
 Widget _buildItems(MainController controller, int index) {
@@ -122,8 +152,8 @@ Widget _buildComponents(MainController controller, int index) {
   );
 }
 
-Widget _buildComponentItems(
-    MainController controller, int index, Component component) {
+Widget _buildComponentItems(MainController controller, int index,
+    Component component) {
   Items item = component.items![index];
 
   Rx<Color> borderColor = MyColors.grey01.obs;
@@ -140,14 +170,14 @@ Widget _buildComponentItems(
     controller.currentWidget.value = item;
   }
 
-  return Obx((){
+  return Obx(() {
     return MouseRegion(
       cursor: MouseCursor.defer,
       onEnter: _incrementEnter,
       onHover: _updateLocation,
       onExit: _incrementExit,
       child: InkWell(
-        onTap: ()=>{},
+        onTap: () => {},
         hoverColor: MyColors.white,
         highlightColor: MyColors.blue01,
         splashColor: Colors.transparent,
@@ -183,8 +213,5 @@ Widget _buildComponentItems(
         ),
       ),
     );
-
   });
 }
-
-

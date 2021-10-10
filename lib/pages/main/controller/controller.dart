@@ -10,6 +10,10 @@ import 'package:get_storage/get_storage.dart';
 
 class MainController extends GetxController {
   RxString text = MyStrings.appName.tr.obs;
+  RxDouble ratio = 2.165333333.obs;
+  double initialWidth = 375.0;
+  RxDouble deviceWidth = 375.0.obs;
+
   RxList<ItemLeftNavigation> items = <ItemLeftNavigation>[].obs;
   RxList<Component> components = <Component>[].obs;
   Rx<Items> currentWidget = Items().obs;
@@ -83,4 +87,8 @@ class MainController extends GetxController {
 
   }
 
+
+
 }
+
+
