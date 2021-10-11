@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterui_web/constant/colors.dart';
 import 'package:flutterui_web/constant/icons.dart';
 import 'package:flutterui_web/constant/images.dart';
 import 'package:flutterui_web/constant/strings.dart';
 import 'package:flutterui_web/pages/main/models/component.dart';
 import 'package:flutterui_web/pages/main/models/item_left_navigation.dart';
+import 'package:flutterui_web/widgets/button.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -18,6 +21,11 @@ class MainController extends GetxController {
   RxList<Component> components = <Component>[].obs;
   Rx<Items> currentWidget = Items().obs;
   late TextEditingController searchController;
+
+  RxList<Items> canvasItems = <Items>[
+    Items(id:3, title: 'Container',icon: MyImages.text, code: Text("Text1")),
+  ].obs;
+
 
   @override
   void onInit() {
@@ -69,8 +77,8 @@ class MainController extends GetxController {
           title: 'Page Widgets',
           type: 'page',
           items: [
-            Items(id:1, title: 'page 1',icon: MyImages.text, code:'code'),
-            Items(id:2, title: 'page 1',icon: MyImages.image, code:'code'),
+            Items(id:1, title: 'page 1',icon: MyImages.text, code:Container(color: Colors.red,)),
+            Items(id:2, title: 'page 1',icon: MyImages.image, code:Container(color: MyColors.green01,)),
           ]),
     );
 
@@ -79,9 +87,9 @@ class MainController extends GetxController {
           title: 'Base Widgets',
           type: 'base',
           items: [
-            Items(id:3, title: 'Text',icon: MyImages.text, code:'code'),
-            Items(id:4, title: 'Image',icon: MyImages.image, code:'code'),
-            Items(id:5, title: 'Button',icon: MyImages.text, code:'code'),
+            Items(id:3, title: 'Text',icon: MyImages.text, code:Text("Text1")),
+            Items(id:4, title: 'Text',icon: MyImages.image, code:SvgPicture.asset(MyStrings.download, height: 24,width: 24,)),
+            Items(id:5, title: 'Button',icon: MyImages.text, code:ButtonWidget(text: 'Button1',onPressed: ()=>{},)),
           ]),
     );
 

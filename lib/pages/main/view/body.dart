@@ -77,14 +77,20 @@ Widget getBody(MainController controller) {
                   children: [
                     Center(
                       child: Container(
-                          margin: const EdgeInsets.all(MyDimens.canvasPadding),
-                          width: controller.deviceWidth.value,
-                          height: controller.deviceWidth.value *
-                              controller.ratio.value,
-                          color: MyColors.background,
-                          child: Center(
-                              child: Text(
-                                  controller.deviceWidth.value.toString()))),
+                        margin: const EdgeInsets.all(MyDimens.canvasPadding),
+                        width: controller.deviceWidth.value,
+                        height: controller.deviceWidth.value *
+                            controller.ratio.value,
+                        color: MyColors.background,
+                        child: Obx((){
+                          return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: const ClampingScrollPhysics(),
+                            itemBuilder: (context, index) => _buildCanvas(controller.canvasItems[index]),
+                            itemCount: controller.canvasItems.length,
+                          );
+                        }),),
                     ),
                   ],
                 ),
@@ -169,49 +175,108 @@ Widget _buildComponentItems(MainController controller, int index,
   void _incrementEnter(PointerEvent details) {
     controller.currentWidget.value = item;
   }
+  final GlobalKey _draggableKey = GlobalKey();
 
   return Obx(() {
-    return MouseRegion(
-      cursor: MouseCursor.defer,
-      onEnter: _incrementEnter,
-      onHover: _updateLocation,
-      onExit: _incrementExit,
-      child: InkWell(
-        onTap: () => {},
-        hoverColor: MyColors.white,
-        highlightColor: MyColors.blue01,
-        splashColor: Colors.transparent,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(MyDimens.buttonRadius),
-            border: Border.all(
-              color: borderColor.value,
-              width: MyDimens.borderWidth,
+    print("sapa : "+ item.code.toString());
+    return LongPressDraggable(
+      data: item,
+      dragAnchorStrategy: pointerDragAnchorStrategy,
+      feedback: DraggingListItem(
+        dragKey: _draggableKey,
+        icon: item.icon.toString(),
+      ),
+      child: MouseRegion(
+        cursor: MouseCursor.defer,
+        onEnter: _incrementEnter,
+        onHover: _updateLocation,
+        onExit: _incrementExit,
+        child: InkWell(
+          onTap: () => {},
+          hoverColor: MyColors.white,
+          highlightColor: MyColors.blue01,
+          splashColor: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(MyDimens.buttonRadius),
+              border: Border.all(
+                color: borderColor.value,
+                width: MyDimens.borderWidth,
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                item.icon.toString(),
-                fit: BoxFit.contain,
-                width: 26,
-                height: 26,
-              ),
-              const SizedBox(
-                height: 4.0,
-              ),
-              TextPrimary(
-                text: item.title.toString(),
-                isCenter: true,
-                style: MyStyles.body3.copyWith(color: MyColors.grey06),
-              )
-            ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  item.icon.toString(),
+                  fit: BoxFit.contain,
+                  width: 26,
+                  height: 26,
+                ),
+                const SizedBox(
+                  height: 4.0,
+                ),
+                TextPrimary(
+                  text: item.title.toString(),
+                  isCenter: true,
+                  style: MyStyles.body3.copyWith(color: MyColors.grey06),
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   });
+
 }
+
+Widget _buildCanvas(Items items) {
+  MainController controller = Get.find();
+  return DragTarget<Items>(
+    builder: (context, candidateItems, rejectedItems) {
+      return items.code ?? Container();
+    },
+    onAccept: (item) {
+      controller.canvasItems.add(item);
+    },
+  );
+}
+
+
+class DraggingListItem extends StatelessWidget {
+  const DraggingListItem({
+    Key? key,
+    required this.dragKey,
+    required this.icon,
+  }) : super(key: key);
+
+  final GlobalKey dragKey;
+  final String icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return FractionalTranslation(
+      translation: const Offset(-0.5, -0.5),
+      child: ClipRRect(
+        key: dragKey,
+        borderRadius: BorderRadius.circular(12.0),
+        child: SizedBox(
+          height: 150,
+          width: 150,
+          child: Opacity(
+            opacity: 0.85,
+            child:  SvgPicture.asset(
+              icon.toString(),
+              fit: BoxFit.scaleDown,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+

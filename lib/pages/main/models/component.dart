@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Component {
   Component({
       this.title, 
@@ -46,7 +48,7 @@ class Items {
   int? id;
   String? title;
   String? icon;
-  String? code;
+  Widget? code;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
