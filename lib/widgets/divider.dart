@@ -11,13 +11,20 @@ class DividerWidget extends StatelessWidget {
     required this.type,
   }) : super(key: key);
 
-@override
+  @override
   Widget build(BuildContext context) {
-    return type == Type.horizontal ? const Divider(color: MyColors.divider, height: MyDimens.divider,) : const VerticalDivider(color: MyColors.divider, width: MyDimens.divider,);
+    return type == Type.horizontal
+        ? const Divider(
+            color: MyColors.divider,
+            thickness: MyDimens.divider,
+            height: MyDimens.divider,
+          )
+        : const VerticalDivider(
+            color: MyColors.divider,
+            thickness: MyDimens.divider,
+            width: MyDimens.divider,
+          );
   }
 }
 
-enum Type {
-  vertical,
-  horizontal
-}
+enum Type { vertical, horizontal }
