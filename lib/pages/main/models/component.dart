@@ -34,7 +34,7 @@ class Items {
 
   @override
   String toString() {
-    return "code : " + code.toString();
+    return '{code : $code , child : $child}';
   }
 }
 

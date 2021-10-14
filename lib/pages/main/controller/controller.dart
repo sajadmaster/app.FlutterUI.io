@@ -7,6 +7,7 @@ import 'package:flutterui_web/constant/images.dart';
 import 'package:flutterui_web/constant/strings.dart';
 import 'package:flutterui_web/pages/main/models/component.dart';
 import 'package:flutterui_web/pages/main/models/item_left_navigation.dart';
+import 'package:flutterui_web/pages/main/view/view.dart';
 import 'package:flutterui_web/widgets/button.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -24,6 +25,7 @@ class MainController extends GetxController {
 
   Rx<Items> canvasItems = Items().obs;
   RxInt count = 0.obs;
+
   // Rx<Items> body = Items().obs;
 
   @override
@@ -48,7 +50,6 @@ class MainController extends GetxController {
       type: WidgetType.main,
       title: 'Scaffold',
       icon: MyImages.text,
-
     );
 
     updateCanvas();
@@ -66,12 +67,21 @@ class MainController extends GetxController {
 
   onSearchTextChanged(String text) async {}
 
-  updateCanvas(){
+  updateCanvas() {
     canvasItems.value.code = Scaffold(
-        backgroundColor: Colors.red,
-        body: canvasItems.value.child?.code ?? Text("Hello World")
+      backgroundColor: Colors.red,
+      // body: canvasItems.value.child?.code ?? Text("Hello World")
+      body: canvasItems.value.child == null
+          ? Text("hollo")
+          : buildCanvas(canvasItems.value.child ?? Items()),
     );
     count.value++;
+
+    if (count.value > 2) {
+      print("--------------------");
+      print(canvasItems.value.child);
+      print("--------------------");
+    }
   }
 
   getItems() {
@@ -123,7 +133,7 @@ class MainController extends GetxController {
       ]),
     );
 
-    Component baseWidgets =  Component(title: 'Base Widgets', type: 'base', items: [
+    components.add(Component(title: 'Base Widgets', type: 'base', items: [
       Items(
           id: 3,
           type: WidgetType.none,
@@ -149,22 +159,17 @@ class MainController extends GetxController {
             text: 'Button1',
             onPressed: () => {},
           )),
-    ]);
-
-    Items container = Items(
+      Items(
         id: 5,
         type: WidgetType.single,
         title: 'Container',
         icon: MyImages.text,
-    );
-    container.code = Container(
-      width: 50,
-      height: 50,
-      color:Colors.yellow,
-      child: container.child?.code ?? SizedBox() ,
-    );
-
-    baseWidgets.items.add(container);
-    components.add(baseWidgets);
+        code: Container(
+          width: 50,
+          height: 50,
+          color: Colors.yellow,
+        ),
+      ),
+    ]));
   }
 }

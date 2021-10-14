@@ -83,7 +83,7 @@ Widget getBody(MainController controller) {
                             controller.ratio.value,
                         color: MyColors.background,
                         child:  Obx((){
-                          return _buildCanvas(controller.canvasItems.value);
+                          return buildCanvas(controller.canvasItems.value);
                         }),
                       ),
                     ),
@@ -228,22 +228,33 @@ Widget _buildComponentItems(MainController controller, int index,
 
 }
 
-Widget _buildCanvas(Items items) {
+Widget buildCanvas(Items items) {
   MainController controller = Get.find();
   return DragTarget<Items>(
     builder: (context, candidateItems, rejectedItems) {
+      print("4");
       return items.code ?? Container();
     },
     onAccept: (item) {
+      print(items);
       if(items.type == WidgetType.main){
         print("1");
         items.child = item;
       }else if(items.type == WidgetType.none){
         print("2");
         items.code = item.code;
-      }else if(items.type == WidgetType.single){
+      }else if(items.type == WidgetType.single && items.title == 'Container'){
         print("3");
         items.child = item;
+        print(items);
+
+        items.code = Container(
+          width: 50,
+          height: 50,
+          color:Colors.yellow,
+          child: items.child?.code ?? Text("container") ,
+        );
+
       }
 
 
