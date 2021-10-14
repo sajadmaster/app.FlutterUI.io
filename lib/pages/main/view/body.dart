@@ -82,15 +82,10 @@ Widget getBody(MainController controller) {
                         height: controller.deviceWidth.value *
                             controller.ratio.value,
                         color: MyColors.background,
-                        child: Obx((){
-                          return ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            physics: const ClampingScrollPhysics(),
-                            itemBuilder: (context, index) => _buildCanvas(controller.canvasItems[index]),
-                            itemCount: controller.canvasItems.length,
-                          );
-                        }),),
+                        child:  Obx((){
+                          return _buildCanvas(controller.canvasItems.value);
+                        }),
+                      ),
                     ),
                   ],
                 ),
@@ -122,6 +117,7 @@ Widget getBody(MainController controller) {
                   ],
                 ),
               ),
+
             ],
           ),
         ),
@@ -150,7 +146,7 @@ Widget _buildComponents(MainController controller, int index) {
         physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 3,
         crossAxisSpacing: 8.0,
-        children: List.generate(item.items!.length, (index) {
+        children: List.generate(item.items.length, (index) {
           return _buildComponentItems(controller, index, item);
         }),
       )
@@ -160,7 +156,7 @@ Widget _buildComponents(MainController controller, int index) {
 
 Widget _buildComponentItems(MainController controller, int index,
     Component component) {
-  Items item = component.items![index];
+  Items item = component.items[index];
 
   Rx<Color> borderColor = MyColors.grey01.obs;
 
@@ -178,7 +174,6 @@ Widget _buildComponentItems(MainController controller, int index,
   final GlobalKey _draggableKey = GlobalKey();
 
   return Obx(() {
-    print("sapa : "+ item.code.toString());
     return LongPressDraggable(
       data: item,
       dragAnchorStrategy: pointerDragAnchorStrategy,
@@ -240,7 +235,20 @@ Widget _buildCanvas(Items items) {
       return items.code ?? Container();
     },
     onAccept: (item) {
-      controller.canvasItems.add(item);
+      if(items.type == WidgetType.main){
+        print("1");
+        items.child = item;
+      }else if(items.type == WidgetType.none){
+        print("2");
+        items.code = item.code;
+      }else if(items.type == WidgetType.single){
+        print("3");
+        items.child = item;
+      }
+
+
+      controller.updateCanvas();
+
     },
   );
 }

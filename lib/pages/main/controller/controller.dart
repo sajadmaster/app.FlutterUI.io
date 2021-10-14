@@ -22,15 +22,37 @@ class MainController extends GetxController {
   Rx<Items> currentWidget = Items().obs;
   late TextEditingController searchController;
 
-  RxList<Items> canvasItems = <Items>[
-    Items(id:3, title: 'Container',icon: MyImages.text, code: Text("Text1")),
-  ].obs;
-
+  Rx<Items> canvasItems = Items().obs;
+  RxInt count = 0.obs;
+  // Rx<Items> body = Items().obs;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    // body.value = Items(
+    //     id: 2,
+    //     type: WidgetType.single,
+    //     title: 'Text',
+    //     icon: MyImages.text,);
+    // body.value.code = Container(
+    //   width: 200,
+    //   height: 200,
+    //   color: Colors.blue,
+    //   child: (body.value.child?.code == null ) ? Text("sa") : Text("sasa"),
+    //   // child: widget.value,
+    // );
+
+    canvasItems.value = Items(
+      id: 3,
+      type: WidgetType.main,
+      title: 'Scaffold',
+      icon: MyImages.text,
+
+    );
+
+    updateCanvas();
+
     getItems();
     getComponents();
     searchController = TextEditingController();
@@ -42,8 +64,14 @@ class MainController extends GetxController {
     super.dispose();
   }
 
-  onSearchTextChanged(String text) async {
+  onSearchTextChanged(String text) async {}
 
+  updateCanvas(){
+    canvasItems.value.code = Scaffold(
+        backgroundColor: Colors.red,
+        body: canvasItems.value.child?.code ?? Text("Hello World")
+    );
+    count.value++;
   }
 
   getItems() {
@@ -73,30 +101,70 @@ class MainController extends GetxController {
     components.clear();
 
     components.add(
-      Component(
-          title: 'Page Widgets',
-          type: 'page',
-          items: [
-            Items(id:1, title: 'page 1',icon: MyImages.text, code:Container(color: Colors.red,)),
-            Items(id:2, title: 'page 1',icon: MyImages.image, code:Container(color: MyColors.green01,)),
-          ]),
+      Component(title: 'Page Widgets', type: 'page', items: [
+        Items(
+            id: 1,
+            type: WidgetType.single,
+            title: 'page 1',
+            icon: MyImages.text,
+            code: Container(
+              color: Colors.blue,
+              height: 100,
+              width: 100,
+            )),
+        Items(
+            id: 2,
+            type: WidgetType.single,
+            title: 'page 1',
+            icon: MyImages.image,
+            code: Container(
+              color: MyColors.green01,
+            )),
+      ]),
     );
 
-    components.add(
-      Component(
-          title: 'Base Widgets',
-          type: 'base',
-          items: [
-            Items(id:3, title: 'Text',icon: MyImages.text, code:Text("Text1")),
-            Items(id:4, title: 'Text',icon: MyImages.image, code:SvgPicture.asset(MyStrings.download, height: 24,width: 24,)),
-            Items(id:5, title: 'Button',icon: MyImages.text, code:ButtonWidget(text: 'Button1',onPressed: ()=>{},)),
-          ]),
+    Component baseWidgets =  Component(title: 'Base Widgets', type: 'base', items: [
+      Items(
+          id: 3,
+          type: WidgetType.none,
+          title: 'Text',
+          icon: MyImages.text,
+          code: Text("Text1")),
+      Items(
+          id: 4,
+          type: WidgetType.single,
+          title: 'Text',
+          icon: MyImages.image,
+          code: SvgPicture.asset(
+            MyStrings.download,
+            height: 24,
+            width: 24,
+          )),
+      Items(
+          id: 5,
+          type: WidgetType.single,
+          title: 'Button',
+          icon: MyImages.text,
+          code: ButtonWidget(
+            text: 'Button1',
+            onPressed: () => {},
+          )),
+    ]);
+
+    Items container = Items(
+        id: 5,
+        type: WidgetType.single,
+        title: 'Container',
+        icon: MyImages.text,
+    );
+    container.code = Container(
+      width: 50,
+      height: 50,
+      color:Colors.yellow,
+      child: container.child?.code ?? SizedBox() ,
     );
 
+    baseWidgets.items.add(container);
+    components.add(baseWidgets);
   }
-
-
-
 }
-
-
